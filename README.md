@@ -9,7 +9,7 @@ Project uses dynamic version of SFML library
 **Note:** you can config the project to use your SFML library
 
 1. make a directory named `vendor` in your solution directory (where the `*.sln` is)
-2. make a directory tree like below.
+2. make a directory tree like below in `vendor`.
     ```
     SFML
     |-- include
