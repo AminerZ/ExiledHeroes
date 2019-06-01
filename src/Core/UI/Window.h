@@ -43,7 +43,7 @@ namespace ExiledHeroes {
 
 		void configure(WindowConfig config);
 
-		void poolEvents();
+		void pollEvents();
 		void setTitle(std::string name);
 		void close();
 	private:
