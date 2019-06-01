@@ -2,7 +2,7 @@
 
 using namespace ExiledHeroes;
 
-State::State() {};
+State::State() {}
 State::~State() {}
 
 void ExiledHeroes::State::onSelect(StatePtr& from) {}
