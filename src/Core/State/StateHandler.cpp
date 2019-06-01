@@ -3,14 +3,16 @@
 using namespace ExiledHeroes;
 
 StateHandler::StateHandler()
-{
-	add(0, std::make_shared<State>());
+	: currentState(nullptr) {
+
+	add(0, std::make_unique<State>());
 	setState(0);
 }
 
-StateHandler::StateHandler(int id, StatePtr state)
-{
-	add(0, std::make_shared<State>());
+StateHandler::StateHandler(int id, StatePtr& state)
+	: currentState(nullptr) {
+
+	add(0, std::make_unique<State>());
 	add(id, state);
 	setState(id);
 }
@@ -22,13 +24,17 @@ void StateHandler::setState(int id) {
 	{
 		StatePtr& newState = states.at(id);
 		
-		if (currentState != nullptr)
-			currentState->onChange(newState);
+		if (currentState) // If currentState pointing to a State
+			currentState->onChange(newState.get());
 		newState->onSelect(currentState);
 		
-		currentState = newState;
+		currentState = newState.get();
 	}
-	catch (...) { currentState = states.at(0);}
+	catch (...) {
+		StatePtr& newState = states.at(0);
+		currentState->onChange(newState.get());
+		currentState = newState.get();
+	}
 }
 
 void StateHandler::draw(sf::RenderTarget& target, sf::RenderStates states) const {
@@ -39,9 +45,8 @@ void StateHandler::update(float delta) {
 	currentState->update(delta);
 }
 
-void StateHandler::add(int id, StatePtr statePtr)
-{
-	states.insert({ id, statePtr });
+void StateHandler::add(int id, StatePtr& statePtr) {
+	states.insert({ id, std::move(statePtr) });
 }
 
 void StateHandler::remove(int id) {
