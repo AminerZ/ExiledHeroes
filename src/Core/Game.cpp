@@ -13,7 +13,7 @@ Game::~Game() {}
 
 void Game::run() {
 	while (window->isOpen()) {
-		window->poolEvents();
+		window->pollEvents();
 		update(clock.restart().asSeconds());
 
 		window->clear();

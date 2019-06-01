@@ -12,13 +12,13 @@ namespace ExiledHeroes {
 
 	class StateHandler : public sf::Drawable, Updatable{
 	public:
-		typedef std::shared_ptr<State> StatePtr;
+		typedef std::unique_ptr<State> StatePtr;
 	private:
 		std::map<short, StatePtr> states;
-		StatePtr currentState;
+		State* currentState;
 	public:
 		StateHandler();
-		StateHandler(int id, StatePtr state);
+		StateHandler(int id, StatePtr& state);
 		~StateHandler();
 
 		void setState(int id);
@@ -26,7 +26,7 @@ namespace ExiledHeroes {
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 		void update(float delta);
 
-		void add(int id, StatePtr statePtr);
+		void add(int id, StatePtr& statePtr);
 		void remove(int id);
 	};
 }

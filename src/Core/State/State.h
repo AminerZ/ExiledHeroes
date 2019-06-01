@@ -8,14 +8,12 @@
 namespace ExiledHeroes {
 	class State : public sf::Drawable, public Updatable
 	{
-	protected:
-		typedef std::shared_ptr<State> StatePtr;
 	public:
 		State();
 		virtual ~State();
 
-		virtual void onSelect(StatePtr& from);
-		virtual void onChange(StatePtr& to);
+		virtual void onSelect(State* from);
+		virtual void onChange(State* to);
 
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 		virtual void update(float delta);

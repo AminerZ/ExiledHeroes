@@ -37,7 +37,7 @@ void Window::configure(WindowConfig config) {
 	createWindow();
 }
 
-void Window::poolEvents() {
+void Window::pollEvents() {
 	while (window->pollEvent(event)) {
 		if (event.type == sf::Event::Closed)
 			close();
