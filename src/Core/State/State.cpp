@@ -5,9 +5,9 @@ using namespace ExiledHeroes;
 State::State() {}
 State::~State() {}
 
-void ExiledHeroes::State::onSelect(StatePtr& from) {}
+void ExiledHeroes::State::onSelect(State* from) {}
 
-void ExiledHeroes::State::onChange(StatePtr& to) {}
+void ExiledHeroes::State::onChange(State* to) {}
 
 void State::draw(sf::RenderTarget& target, sf::RenderStates states) const {}
 
