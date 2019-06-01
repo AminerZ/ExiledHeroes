@@ -17,9 +17,8 @@ StateHandler::StateHandler(int id, StatePtr state)
 
 StateHandler::~StateHandler() {}
 
-void StateHandler::setState(int id)
-{
-	try 
+void StateHandler::setState(int id) {
+	try
 	{
 		StatePtr& newState = states.at(id);
 		
@@ -32,13 +31,11 @@ void StateHandler::setState(int id)
 	catch (...) { currentState = states.at(0);}
 }
 
-void StateHandler::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
+void StateHandler::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(*currentState, states);
 }
 
-void StateHandler::update(float delta)
-{
+void StateHandler::update(float delta) {
 	currentState->update(delta);
 }
 
@@ -47,7 +44,6 @@ void StateHandler::add(int id, StatePtr statePtr)
 	states.insert({ id, statePtr });
 }
 
-void StateHandler::remove(int id)
-{
+void StateHandler::remove(int id) {
 	states.erase(id);
 }
