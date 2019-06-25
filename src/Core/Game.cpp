@@ -6,8 +6,7 @@ Game::Game()
 	: Game(0,nullptr) {}
 
 Game::Game(int argc, char* argv[])
-	: window(std::make_unique<Window>()){
-}
+	: window(std::make_unique<Window>()) {}
 
 Game::~Game() {}
 
@@ -28,11 +27,14 @@ Handlers& Game::getHandlers() {
 	return handlers;
 }
 
+std::unique_ptr<StateHandler>& Game::getStateHandler() {
+	return handlers.stateHandler;
+}
+
 void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	window->draw(handlers, states);
 }
 
-void Game::update(float delta)
-{
+void Game::update(float delta) {
 	handlers.update(delta);
 }
