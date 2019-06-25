@@ -8,15 +8,16 @@
 
 namespace ExiledHeroes {
 	enum TagType : int8_t {
-		End		 = 0x0,
-		Byte	 = 0x1,
-		Short	 = 0x2,
-		Int		 = 0x3,
-		Long	 = 0x4,
-		Float	 = 0x5,
-		Double	 = 0x6,
-		String	 = 0x7,
-		Compound = 0x8
+		End				= 0x0,
+		Byte			= 0x1,
+		Short			= 0x2,
+		Int				= 0x3,
+		Long			= 0x4,
+		Float			= 0x5,
+		Double			= 0x6,
+		String			= 0x7,
+		Compound		= 0x8,
+		CompoundList	= 0x9,
 	};
 
 	class Tag {

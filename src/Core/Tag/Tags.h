@@ -3,3 +3,4 @@
 #include "Tags/TagPrimitive.h"
 #include "Tags/TagString.h"
 #include "Tags/TagCompound.h"
+#include "Tags/TagCompoundList.h"
