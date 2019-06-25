@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include <string>
 
 #include "Core/Tag/Tag.h"
@@ -25,21 +24,21 @@ namespace ExiledHeroes {
 		}
 
 	private:
-		void readPayload(std::istream& input) override {
+		void readPayload(EndianIStream& input) override {
 			int16_t valueSizeBuffer;
-			input.read((char*)& valueSizeBuffer, sizeof(int16_t));
+			input.read<int16_t>(&valueSizeBuffer);
 
 			std::string valueBuffer(valueSizeBuffer, '\0');
-			input.read(&valueBuffer[0], valueSizeBuffer * sizeof(char));
+			input.read(valueBuffer, valueSizeBuffer);
 			
 			setValue(valueBuffer);
 		}
 
-		void writePayload(std::ostream& output) override {
+		void writePayload(EndianOStream& output) override {
 			int16_t valueSizeBuffer = (int16_t)value.size();
-			output.write((char*)& valueSizeBuffer, sizeof(int16_t));
+			output.write<int16_t>(&valueSizeBuffer);
 
-			output.write(&value[0], valueSizeBuffer * sizeof(char));
+			output.write(value, valueSizeBuffer);
 		}
 	};
 }
