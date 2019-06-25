@@ -5,7 +5,7 @@
 
 using namespace ExiledHeroes;
 
-void initializeStates(std::unique_ptr<StateHandler>&& stateHandler);
+void initializeStates(std::unique_ptr<StateHandler>& stateHandler);
 
 /* Main Entry Point of the Game */
 int main(int argc, char* argv[]) {
@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
 	return 0;
 }
 
-void initializeStates(std::unique_ptr<StateHandler>&& stateHandler) {
+void initializeStates(std::unique_ptr<StateHandler>& stateHandler) {
 	stateHandler->add<LoadState>(States::Load);
 	stateHandler->add<TestState>(States::Test);
 	// TODO: add more States Here
