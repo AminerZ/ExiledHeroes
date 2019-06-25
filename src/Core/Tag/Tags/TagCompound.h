@@ -19,8 +19,13 @@ namespace ExiledHeroes {
 		TagCompound(std::string name)
 			: Tag(TagType::Compound, name) {}
 
-		void add(std::unique_ptr<Tag>& tag) {
+		void add(std::unique_ptr<Tag> tag) {
 			tags.insert({ tag->getName(), std::move(tag) });
+		}
+
+		template<class T = Tag>
+		T* get(std::string name) {
+			return (T*)tags.at(name).get();
 		}
 
 		void remove(std::string name) {
@@ -30,12 +35,11 @@ namespace ExiledHeroes {
 		void readPayload(EndianIStream& input) override{
 			while (input.peek() != TagType::End) {
 				TagType type = (TagType) input.peek(); // Peek element type from stream
-				std::cout << getName() + "::Reading Tag Type " << (char)(type+48) << std::endl;
-
+				
 				std::unique_ptr<Tag> tag = TagUtil::makeTag(type);
 
 				tag->read(input); // Read Tag Data to tag
-				add(tag);
+				add(std::move(tag));
 			}
 			input.ignore(sizeof(TagType::End));
 		}
