@@ -10,7 +10,7 @@
 
 namespace ExiledHeroes {
 
-	class StateHandler : public sf::Drawable, Updatable{
+	class StateHandler : public sf::Drawable, Updatable {
 	public:
 		typedef std::unique_ptr<State> StatePtr;
 	private:
@@ -30,5 +30,10 @@ namespace ExiledHeroes {
 			states.emplace(id, new T(this));
 		}
 		void remove(int id);
+		
+		template<class T>
+		T* get(int id) {
+			return static_cast<T*>(states.at(id).get());
+		}
 	};
 }
