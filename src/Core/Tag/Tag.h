@@ -1,9 +1,9 @@
 #pragma once
-#include <iostream>
 #include <string>
 
 #include "Core/Util/Stream/EndianIStream.h"
 #include "Core/Util/Stream/EndianOStream.h"
+
 #define TYPE_NAME(x) typeid(x).name()
 
 namespace ExiledHeroes {
@@ -25,6 +25,7 @@ namespace ExiledHeroes {
 		std::string name;
 	public:
 		Tag(TagType type, std::string name = "");
+		
 		virtual ~Tag();
 
 		void read(EndianIStream input);
