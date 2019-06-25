@@ -26,7 +26,10 @@ namespace ExiledHeroes {
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 		void update(float delta);
 
-		void add(int id, StatePtr& statePtr);
+		template<class T = State>
+		void add(int id) {
+			states.emplace(id, new T(this));
+		}
 		void remove(int id);
 	};
 }

@@ -5,7 +5,7 @@ using namespace ExiledHeroes;
 StateHandler::StateHandler()
 	: currentState(nullptr) {
 
-	add(0, std::make_unique<State>());
+	add<State>(0);
 	setState(0);
 }
 
@@ -43,10 +43,6 @@ void StateHandler::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void StateHandler::update(float delta) {
 	currentState->update(delta);
-}
-
-void StateHandler::add(int id, StatePtr& statePtr) {
-	states.insert({ id, std::move(statePtr) });
 }
 
 void StateHandler::remove(int id) {
