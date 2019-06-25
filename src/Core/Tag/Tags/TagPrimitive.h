@@ -2,6 +2,7 @@
 #include <string>
 
 #include "Core/Tag/Tag.h"
+#include "Core/Tag/TagUtil.h"
 
 namespace ExiledHeroes {
 
@@ -11,10 +12,10 @@ namespace ExiledHeroes {
 		T value;
 	public:
 		TagPrimitive()
-			: Tag(getPrimitiveType<T>()) {}
+			: Tag(TagUtil::getPrimitiveType<T>()) {}
 
 		TagPrimitive(std::string name)
-			: Tag(getPrimitiveType<T>(), name) {}
+			: Tag(TagUtil::getPrimitiveType<T>(), name) {}
 
 		T getValue() {
 			return value;

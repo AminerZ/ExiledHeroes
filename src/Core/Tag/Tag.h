@@ -33,9 +33,6 @@ namespace ExiledHeroes {
 		TagType getType();
 		std::string getName();
 
-		template<class T>
-		TagType getPrimitiveType();
-
 	private:
 		void readType(EndianIStream& input);
 		void writeType(EndianOStream& output);
@@ -47,19 +44,4 @@ namespace ExiledHeroes {
 		virtual void readPayload(EndianIStream& input);
 		virtual void writePayload(EndianOStream& output);
 	};
-	
-	template<class T>
-	TagType Tag::getPrimitiveType() {
-		const char* type = TYPE_NAME(T);
-		if		(type == TYPE_NAME(int8_t))   return TagType::Byte;
-		else if (type == TYPE_NAME(int16_t))  return TagType::Short;
-		else if (type == TYPE_NAME(int32_t))  return TagType::Int;
-		else if (type == TYPE_NAME(int64_t))  return TagType::Long;
-		else if (type == TYPE_NAME(float_t))  return TagType::Float;
-		else if (type == TYPE_NAME(double_t)) return TagType::Double;
-		else {
-			throw "No Primitive types found";
-			return TagType::End;
-		}
-	}
 }
