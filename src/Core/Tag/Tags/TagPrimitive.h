@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include <string>
 
 #include "Core/Tag/Tag.h"
@@ -26,12 +25,12 @@ namespace ExiledHeroes {
 		}
 
 	private:
-		void readPayload(std::istream& input) override {
-			input.read((char*)& value, sizeof(T));
+		void readPayload(EndianIStream& input) override {
+			input.read<T>(&value);
 		}
 
-		void writePayload(std::ostream& output) override {
-			output.write((char*)& value, sizeof(T));
+		void writePayload(EndianOStream& output) override {
+			output.write<T>(&value);
 		}
 	};
 
