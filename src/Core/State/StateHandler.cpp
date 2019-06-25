@@ -9,14 +9,6 @@ StateHandler::StateHandler()
 	setState(0);
 }
 
-StateHandler::StateHandler(int id, StatePtr& state)
-	: currentState(nullptr) {
-
-	add(0, std::make_unique<State>());
-	add(id, state);
-	setState(id);
-}
-
 StateHandler::~StateHandler() {}
 
 void StateHandler::setState(int id) {

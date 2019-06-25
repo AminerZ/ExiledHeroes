@@ -18,7 +18,6 @@ namespace ExiledHeroes {
 		State* currentState;
 	public:
 		StateHandler();
-		StateHandler(int id, StatePtr& state);
 		~StateHandler();
 
 		void setState(int id);
