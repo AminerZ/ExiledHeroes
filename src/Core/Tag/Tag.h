@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 
+#include "Core/Util/Stream/EndianIStream.h"
+#include "Core/Util/Stream/EndianOStream.h"
 #define TYPE_NAME(x) typeid(x).name()
 
 namespace ExiledHeroes {
@@ -25,8 +27,8 @@ namespace ExiledHeroes {
 		Tag(TagType type, std::string name = "");
 		virtual ~Tag();
 
-		void read(std::istream& input);
-		void write(std::ostream& output);
+		void read(EndianIStream input);
+		void write(EndianOStream output);
 
 		TagType getType();
 		std::string getName();
@@ -35,15 +37,15 @@ namespace ExiledHeroes {
 		TagType getPrimitiveType();
 
 	private:
-		void readType(std::istream& input);
-		void writeType(std::ostream& output);
+		void readType(EndianIStream& input);
+		void writeType(EndianOStream& output);
 
-		void readName(std::istream& input);
-		void writeName(std::ostream& output);
+		void readName(EndianIStream& input);
+		void writeName(EndianOStream& output);
 	
 	protected:
-		virtual void readPayload(std::istream& input);
-		virtual void writePayload(std::ostream& output);
+		virtual void readPayload(EndianIStream& input);
+		virtual void writePayload(EndianOStream& output);
 	};
 	
 	template<class T>

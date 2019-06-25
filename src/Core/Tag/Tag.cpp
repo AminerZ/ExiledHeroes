@@ -7,13 +7,13 @@ Tag::Tag(TagType type, std::string name)
 
 Tag::~Tag() {}
 
-void Tag::read(std::istream& input) {
+void Tag::read(EndianIStream input) {
 	readType(input);
 	readName(input);
 	readPayload(input);
 }
 
-void Tag::write(std::ostream& output) {
+void Tag::write(EndianOStream output) {
 	writeType(output);
 	writeName(output);
 	writePayload(output);
@@ -27,31 +27,31 @@ std::string Tag::getName() {
 	return name;
 }
 
-void Tag::readType(std::istream& input) {
-	input.read((char*)& type, sizeof(int8_t));
+void Tag::readType(EndianIStream& input) {
+	input.read<TagType>(&type);
 }
 
-void Tag::writeType(std::ostream& output) {
-	output.write((char*)& type, sizeof(int8_t));
+void Tag::writeType(EndianOStream& output) {
+	output.write<TagType>(&type);
 }
 
-void Tag::readName(std::istream& input) {
+void Tag::readName(EndianIStream& input) {
 	int16_t nameSizeBuffer;
-	input.read((char*)& nameSizeBuffer, sizeof(int16_t));
+	input.read<int16_t>(&nameSizeBuffer);
 	
 	std::string nameBuffer(nameSizeBuffer, '\0');
-	input.read(&nameBuffer[0], nameSizeBuffer * sizeof(char));
+	input.read(nameBuffer, nameSizeBuffer);
 
 	name = nameBuffer;
 }
 
-void Tag::writeName(std::ostream& output) {
+void Tag::writeName(EndianOStream& output) {
 	int16_t nameSizeBuffer = (int16_t) name.size();
-	output.write((char*)& nameSizeBuffer, sizeof(int16_t));
+	output.write<int16_t>(&nameSizeBuffer);
 
-	output.write(&name[0], nameSizeBuffer * sizeof(char));
+	output.write(name, nameSizeBuffer);
 }
 
-void Tag::readPayload(std::istream& input) {}
+void Tag::readPayload(EndianIStream& input) {}
 
-void Tag::writePayload(std::ostream& output) {}
+void Tag::writePayload(EndianOStream& output) {}
