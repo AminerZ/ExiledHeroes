@@ -9,8 +9,7 @@ void initializeStates(std::unique_ptr<StateHandler>&& stateHandler);
 
 /* Main Entry Point of the Game */
 int main(int argc, char* argv[]) {
-	
-	
+
 	std::unique_ptr<Game> game = std::make_unique<Game>(argc, argv);
 
 	initializeStates(game->getStateHandler());
