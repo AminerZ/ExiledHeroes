@@ -7,5 +7,6 @@ namespace ExiledHeroes {
 	enum States {
 		Empty,
 		Load,
+		Test
 	};
 }
